@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 #include <string.h>
 #include "monty.h"
 /**
@@ -8,16 +8,15 @@
  *@n: number
  *Return: number elements.
  */
-void push(stack_t **head, unsigned int n)
+void *push(stack_t **head, int n)
 {
 	stack_t *new_tail = malloc(sizeof(stack_t));
 	stack_t *fast_iter = *head;
 
-	printf("FUNCTION PUSH");
 	if (new_tail == NULL)
 	{
 		free(new_tail);
-		return;
+		return (0);
 	}
 	new_tail->n = n;
 	new_tail->next = NULL;
@@ -25,7 +24,7 @@ void push(stack_t **head, unsigned int n)
 	{
 		new_tail->prev = NULL;
 		*head = new_tail;
-		return;
+		return (*head);
 	}
 	while (fast_iter->next != NULL)
 	{
@@ -41,21 +40,18 @@ void push(stack_t **head, unsigned int n)
  *@n: number
  *Return: number elements.
  */
-void pall(stack_t **head, unsigned int n)
+void pall(const stack_t *h, int n)
 {
 	int i = 0;
-	stack_t *tmp = *head;
-	(void)(n);
 
-	printf("FUNCTION PALL");
-	if (tmp == NULL)
+	if (h == NULL)
 	{
-		return;
+		return (0);
 	}
-	while (tmp != NULL)
+	while (h != NULL)
 	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		printf("%d\n", h->n);
+		h = h->next;
 		i++;
 	}
 }
