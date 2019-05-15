@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		FILE *file;
 		/*char *opcode_token;*/
 		char *buffer;
-		size_t buffsize = 1024;
+		size_t buffsize = 32;
 		ssize_t line_size;
 		file = fopen(argv[1], "r");
 		if (file == NULL)
@@ -21,10 +21,22 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "Cannot open file \n");
 			exit(0);
 		}
+		buffer = (char *)malloc(buffsize * sizeof(char));
+		if (buffer == NULL)
+		{
+			perror("Unable to allocate buffer");
+			exit(1);
+		}
 		line_size = getline(&buffer, &buffsize, file);
+
+/*		if (buffer == NULL)
+		{
+			printf("line_size error");
+			}*/
 		while (line_size >= 0)
 		{
 			printf("%s", buffer);
+			line_size = getline(&buffer, &buffsize, file);
 		}
 		free(buffer);
 		fclose(file);
