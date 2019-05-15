@@ -10,21 +10,24 @@ int main(int argc, char *argv[])
 {
 	if(argc > 1)
 	{
-		FILE *fptr;
-		char ch;
-		fptr = fopen(argv[1], "r");
-		if (fptr == NULL)
+		FILE *file;
+		/*char *opcode_token;*/
+		char *buffer;
+		size_t buffsize = 1024;
+		ssize_t line_size;
+		file = fopen(argv[1], "r");
+		if (file == NULL)
 		{
-			printf("Cannot open file \n");
+			fprintf(stderr, "Cannot open file \n");
 			exit(0);
 		}
-		ch = fgetc(fptr);
-		while (ch != EOF)
+		line_size = getline(&buffer, &buffsize, file);
+		while (line_size >= 0)
 		{
-			printf ("%c", ch);
-			ch = fgetc(fptr);
+			printf("%s", buffer);
 		}
-		fclose(fptr);
+		free(buffer);
+		fclose(file);
 	}
 	return (0);
 }
