@@ -10,8 +10,11 @@ int main(int argc, char *argv[])
 {
 	if(argc > 1)
 	{
-		void (*fun_ptr_arr[]) (va_list) = {push, pall};
-		char fname[] = {'push', 'pall'};
+		instruction_t ints[] = {
+        	{"push", push},
+        	{"pall", pall},
+        	{NULL, NULL}
+		};
 		FILE *file;
 		char *token;
 		char *buffer;
@@ -22,6 +25,7 @@ int main(int argc, char *argv[])
 		stack_t *head;
 		head = NULL;
 		file = fopen(argv[1], "r");
+
 		if (file == NULL)
 		{
 			fprintf(stderr, "Cannot open file \n");
