@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "monty.h"
-#include <string.h>
 /**
  * main - Entry point
  *
@@ -71,6 +68,7 @@ int main(int argc, char *argv[])
 			}
 			line_size = getline(&buffer, &buffsize, file);
 		}
+		free(head);
 		free(buffer);
 		fclose(file);
 	}
