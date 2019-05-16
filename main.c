@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "monty.h"
-#include <string.h>
 /**
  * main - Entry point
  *
@@ -23,11 +20,12 @@ int main(int argc, char *argv[])
 	size_t buffsize = 32;
 	ssize_t line_size;
 	int f_idx = 0;
+	int line_count = 0;
 	file = fopen(argv[1], "r");
 	/*(void)(head);
-	(void)(f_idx);
+	  (void)(f_idx);*/
 	(void)(par_number);
-	(void)(ints);*/
+	/*(void)(ints);*/
 	if(argc > 1)
 	{
 		head = NULL;
@@ -46,6 +44,7 @@ int main(int argc, char *argv[])
 
 		while (line_size >= 0)
 		{
+			line_count++;
 			token = strtok(buffer, delimiters);
 			if (token == NULL)
 			{
@@ -60,7 +59,20 @@ int main(int argc, char *argv[])
                                         {
 						if(strcmp(token, "push") == 0)
 						{
-							par_number = atoi(strtok(NULL, delimiters));
+							token = strtok(NULL, delimiters);
+							if(_isdigit(token) == 0)
+							{
+								free_dlistint(head);
+								free(buffer);
+								buffer = NULL;
+								fclose(file);
+								fprintf(stderr,"L<%d>: usage: push integer\n",line_count);
+								exit(EXIT_FAILURE);
+							}
+							else if(_isdigit(token) == 1)
+							{
+								par_number = atoi(token);
+							}
 						}
 						ints[f_idx].f(&head, par_number);
                                         }
@@ -71,7 +83,9 @@ int main(int argc, char *argv[])
 			}
 			line_size = getline(&buffer, &buffsize, file);
 		}
+		free_dlistint(head);
 		free(buffer);
+		buffer = NULL;
 		fclose(file);
 	}
 	return (0);
