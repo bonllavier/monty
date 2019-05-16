@@ -19,12 +19,15 @@ int main(int argc, char *argv[])
 	FILE *file;
 	char *token;
 	char *buffer;
-	char *delimiters = " \t\r\n\v\f";
+	char *delimiters = " \t\n";
 	size_t buffsize = 32;
 	ssize_t line_size;
 	int f_idx = 0;
 	file = fopen(argv[1], "r");
-
+	/*(void)(head);
+	(void)(f_idx);
+	(void)(par_number);
+	(void)(ints);*/
 	if(argc > 1)
 	{
 		head = NULL;
@@ -51,23 +54,20 @@ int main(int argc, char *argv[])
 			}
 			while (token != NULL)
 			{
-				for(f_idx = 0 ; ints[f_idx].opcode != NULL ; f_idx++)
+				while(ints[f_idx].opcode != NULL)
                                 {
-					/*printf(" |opcode: (%s)| ", ints[f_idx].opcode);*/
-                                        if(strcmp(ints[f_idx].opcode, token) == 0)
+					if(strcmp(ints[f_idx].opcode, token) == 0)
                                         {
 						if(strcmp(token, "push") == 0)
+						{
 							par_number = atoi(strtok(NULL, delimiters));
-                                                /*printf("found: (%s) in: (%d)|", ints[f_idx].opcode, par_number);*/
+						}
 						ints[f_idx].f(&head, par_number);
                                         }
-					/*else if(strcmp("pil", token) == 0)
-					{
-						ints[f_idx].f(&head, par_number);
-						}*/
-					/*printf(" |opcode: (%s)| ", ints[f_idx].opcode);*/
+					f_idx++;
 				}
 				token = strtok(NULL, delimiters);
+				f_idx = 0;
 			}
 			line_size = getline(&buffer, &buffsize, file);
 		}

@@ -10,29 +10,48 @@
  */
 void push(stack_t **head, unsigned int n)
 {
-	stack_t *new_tail = malloc(sizeof(stack_t));
-	stack_t *fast_iter = *head;
+	stack_t *new_head = malloc(sizeof(stack_t));
 
-	printf("FUNCTION PUSH");
-	if (new_tail == NULL)
+	if (new_head == NULL)
 	{
-		free(new_tail);
+		free(new_head);
 		return;
 	}
-	new_tail->n = n;
-	new_tail->next = NULL;
-	if (*head == NULL)
+	new_head->n = n;
+	new_head->next = *head;
+	new_head->prev = NULL;
+	if (*head != NULL)
 	{
-		new_tail->prev = NULL;
-		*head = new_tail;
-		return;
+		(*head)->prev = new_head;
 	}
-	while (fast_iter->next != NULL)
-	{
-		fast_iter = fast_iter->next;
-	}
-	fast_iter->next = new_tail;
-	new_tail->prev = fast_iter;
+	*head = new_head;
+	return;
+
+}
+void _posh(stack_t **head, unsigned int n)
+{
+        stack_t *new_tail = malloc(sizeof(stack_t));
+        stack_t *fast_iter = *head;
+
+        if (new_tail == NULL)
+        {
+                free(new_tail);
+                return;
+        }
+        new_tail->n = n;
+        new_tail->next = NULL;
+        if (*head == NULL)
+        {
+                new_tail->prev = NULL;
+                *head = new_tail;
+                return;
+        }
+        while (fast_iter->next != NULL)
+        {
+                fast_iter = fast_iter->next;
+        }
+        fast_iter->next = new_tail;
+        new_tail->prev = fast_iter;
 
 }
 /**
@@ -47,7 +66,6 @@ void pall(stack_t **head, unsigned int n)
 	stack_t *tmp = *head;
 	(void)(n);
 
-	printf("FUNCTION PALL");
 	if (tmp == NULL)
 	{
 		return;
