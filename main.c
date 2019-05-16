@@ -1,86 +1,44 @@
 #include "monty.h"
+int par_number = 0;
 /**
  * main - Entry point
- *
+ *@argc: argument counter
+ *@argv: argumnt vector
  * Return: Always 0 (Success)
  */
 int main(int argc, char *argv[])
 {
 	stack_t *head;
-        unsigned int par_number;
-	instruction_t ints[] = {
-                {"push", push},
-                {"pall", pall},
-                {NULL, NULL}
-	};
 	FILE *file;
 	char *token;
 	char *buffer;
-	char *delimiters = " \t\n";
-	size_t buffsize = 32;
+	size_t buffsize = 1024;
 	ssize_t line_size;
-	int f_idx = 0;
-	int line_count = 0;
+	unsigned int line_count = 0;
+
 	file = fopen(argv[1], "r");
-	/*(void)(head);
-	  (void)(f_idx);*/
-	(void)(par_number);
-	/*(void)(ints);*/
-	if(argc > 1)
-	{
-		head = NULL;
+	token = "";
+	if (argc == 1 || argc > 2)
+	{ fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE); }
+	else if (argc == 2)
+	{ head = NULL;
 		if (file == NULL)
-		{
-			fprintf(stderr, "Cannot open file \n");
-			exit(0);
+		{ fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+			fclose(file);
+			exit(EXIT_FAILURE);
 		}
 		buffer = (char *)malloc(buffsize * sizeof(char));
 		if (buffer == NULL)
-		{
-			perror("Unable to allocate buffer");
-			exit(1);
+		{ fprintf(stderr, "Error: malloc failed\n");
+			free(buffer);
+			exit(EXIT_FAILURE);
 		}
 		line_size = getline(&buffer, &buffsize, file);
 
 		while (line_size >= 0)
-		{
-			line_count++;
-			token = strtok(buffer, delimiters);
-			if (token == NULL)
-			{
-				free(buffer);
-				continue;
-			}
-			while (token != NULL)
-			{
-				while(ints[f_idx].opcode != NULL)
-                                {
-					if(strcmp(ints[f_idx].opcode, token) == 0)
-                                        {
-						if(strcmp(token, "push") == 0)
-						{
-							token = strtok(NULL, delimiters);
-							if(_isdigit(token) == 0)
-							{
-								free_dlistint(head);
-								free(buffer);
-								buffer = NULL;
-								fclose(file);
-								fprintf(stderr,"L<%d>: usage: push integer\n",line_count);
-								exit(EXIT_FAILURE);
-							}
-							else if(_isdigit(token) == 1)
-							{
-								par_number = atoi(token);
-							}
-						}
-						ints[f_idx].f(&head, par_number);
-                                        }
-					f_idx++;
-				}
-				token = strtok(NULL, delimiters);
-				f_idx = 0;
-			}
+		{ line_count++;
+			_strtok(buffer, line_count, token, &head, file);
 			line_size = getline(&buffer, &buffsize, file);
 		}
 		free_dlistint(head);
@@ -89,4 +47,19 @@ int main(int argc, char *argv[])
 		fclose(file);
 	}
 	return (0);
+}
+
+/**
+ *final_liberation - final liberation
+ *@head: list
+ *@buffer: buffer
+ *@file: file to be open
+ *Return: number elements.
+ */
+void final_liberation(stack_t **head, char *buffer, FILE *file)
+{
+	free_dlistint(*head);
+	free(buffer);
+	buffer = NULL;
+	fclose(file);
 }

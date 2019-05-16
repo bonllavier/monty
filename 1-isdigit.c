@@ -6,12 +6,13 @@
  */
 int _isdigit(char *c)
 {
-        int i;
-	if(c == NULL)
+	int i;
+
+	if (c == NULL)
 	{
 		return (0);
 	}
-	for(i = 0 ; *(c + i) != '\0' ; i++)
+	for (i = 0 ; *(c + i) != '\0' ; i++)
 	{
 		if (c[i] >= '0' && c[i] <= '9')
 		{
