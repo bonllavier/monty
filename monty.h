@@ -39,4 +39,7 @@ void push(stack_t **head, unsigned int n);
 void pall(stack_t **h, unsigned int n);
 void free_dlistint(stack_t *head);
 int _isdigit(char *c);
+void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi);
+void final_liberation(stack_t **head, char *buffer, FILE *file);
+extern int par_number;
 #endif
