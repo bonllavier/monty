@@ -11,6 +11,7 @@
 void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 {
 	int f_idx = 0;
+	int breaker = 0;
 	instruction_t ints[] = {
 		{"push", push},
 		{"pall", pall},
@@ -21,7 +22,7 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 	char delimiters[] = " \n\t";
 
 	tok = strtok(buf, delimiters);
-	while (tok != NULL)
+	while (tok != NULL && breaker == 0)
 	{
 		while (ints[f_idx].opcode != NULL)
 		{
@@ -32,13 +33,12 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 					if (_isdigit(tok) == 0)
 					{ final_liberation(he, buf, fi);
 						fprintf(stderr, "L%d: usage: push integer\n", l_ct);
-						exit(EXIT_FAILURE);
-					}
+						exit(EXIT_FAILURE); }
 					else if (_isdigit(tok) == 1)
-					{ par_number = atoi(tok);
-					}
+					{ par_number = atoi(tok); }
 				}
 				ints[f_idx].f(he, l_ct);
+				breaker = 1;
 				break;
 			}
 			f_idx++;
@@ -48,5 +48,6 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 			final_liberation(he, buf, fi);
 			exit(EXIT_FAILURE); }
 		tok = strtok(NULL, delimiters);
-		f_idx = 0; }
+		f_idx = 0;
+	}
 }
