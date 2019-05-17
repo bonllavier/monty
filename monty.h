@@ -39,6 +39,9 @@ typedef struct instruction_s
 int _strcmp(char *s1, char *s2);
 void push(stack_t **head, unsigned int n);
 void pall(stack_t **h, unsigned int n);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 void free_dlistint(stack_t *head);
 int _isdigit(char *c);
 void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi);
