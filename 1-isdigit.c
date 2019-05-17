@@ -7,6 +7,7 @@
 int _isdigit(char *c)
 {
 	int i;
+	int cont = 0;
 
 	if (c == NULL)
 	{
@@ -14,8 +15,17 @@ int _isdigit(char *c)
 	}
 	for (i = 0 ; *(c + i) != '\0' ; i++)
 	{
-		if ((c[i] >= '0' && c[i] <= '9') || c[i] == '-')
+		if (cont == 2)
 		{
+			return (0);
+		}
+		if ((c[i] >= '0' && c[i] <= '9') ||
+(c[i] == '-' && (c[i + 1] >= '0' && c[i + 1] <= '9')))
+		{
+			if (c[i] == '-' && (c[i + 1] >= '0' && c[i + 1] <= '9'))
+			{
+				cont++;
+			}
 		}
 		else
 		{
