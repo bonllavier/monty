@@ -16,11 +16,12 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 		{"pall", pall},
 		{NULL, NULL}
 	};
-	char *delimiters = " \t\n";
+	char delimiters[] = " \n\t";
+	(void)(fi);
 
 	tok = strtok(buf, delimiters);
 	if (tok == NULL)
-	{ free(buf); }
+	{ /*free(buf);*/ }
 	while (tok != NULL)
 	{
 		while (ints[f_idx].opcode != NULL)
