@@ -16,16 +16,16 @@ int main(int argc, char *argv[])
 	ssize_t line_size;
 	unsigned int line_count = 0;
 
-	token = NULL;
 	if (argc == 1 || argc > 2)
 	{ fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE); }
 	else if (argc == 2)
-	{ head = NULL;
+	{ token = NULL;
+		head = NULL;
 		file = fopen(argv[1], "r");
 		if (file == NULL)
 		{ fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-			/*fclose(file);*/
+			fclose(file);
 			exit(EXIT_FAILURE);
 		}
 		buffer = (char *)malloc(buffsize * sizeof(char));
