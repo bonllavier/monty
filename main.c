@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	FILE *file;
 	char *token;
 	char *buffer;
-	size_t buffsize = 32;
+	size_t buffsize = 1024;
 	ssize_t line_size;
 	unsigned int line_count = 0;
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 		file = fopen(argv[1], "r");
 		if (file == NULL)
 		{ fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-			fclose(file);
+			/*fclose(file);*/
 			exit(EXIT_FAILURE);
 		}
 		buffer = (char *)malloc(buffsize * sizeof(char));
