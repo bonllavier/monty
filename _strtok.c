@@ -21,8 +21,6 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 	char delimiters[] = " \n\t";
 
 	tok = strtok(buf, delimiters);
-	if (tok == NULL)
-	{ }
 	while (tok != NULL)
 	{
 		while (ints[f_idx].opcode != NULL)
