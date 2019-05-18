@@ -20,7 +20,7 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 	char delimiters[] = " \n\t";
 
 	tok = strtok(buf, delimiters);
-	while (tok != NULL && breaker == 0)
+	while (tok != NULL && breaker == 0 && tok[0] != '#')
 	{
 		while (ints[f_idx].opcode != NULL)
 		{
@@ -29,9 +29,11 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 				if (strcmp(tok, "push") == 0)
 				{ tok = strtok(NULL, delimiters);
 					if (_isdigit(tok) == 0)
-					{ final_liberation(he, buf, fi);
+					{
+						final_liberation(he, buf, fi);
 						fprintf(stderr, "L%d: usage: push integer\n", l_ct);
-						exit(EXIT_FAILURE); }
+						exit(EXIT_FAILURE);
+					}
 					else if (_isdigit(tok) == 1)
 					{ par_number = atoi(tok); }
 				}
