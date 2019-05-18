@@ -21,6 +21,7 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 		{"add", add},
 		{"nop", nop},
 		{"sub", sub},
+		{"div", divi},
 		{NULL, NULL}
 	};
 	char delimiters[] = " \n\t";
