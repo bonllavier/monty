@@ -13,16 +13,8 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 	int f_idx = 0;
 	int breaker = 0;
 	instruction_t ints[] = {
-		{"push", push},
-		{"pall", pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"swap", swap},
-		{"add", add},
-		{"nop", nop},
-		{"sub", sub},
-		{"div", divi},
-		{"mul", mul},
+		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap},
+		{"add", add}, {"nop", nop}, {"sub", sub}, {"div", divi}, {"mul", mul},
 		{NULL, NULL}
 	};
 	char delimiters[] = " \n\t";
