@@ -7,17 +7,13 @@
 void pstr(stack_t **head, unsigned int n)
 {
 	stack_t *tmp = *head;
+	(void)(n);
 
-	if (*head == NULL || head == NULL)
+	while (tmp != NULL)
 	{
-		fprintf(stderr, "L%d: can't pstr, stack empty\n", n);
-		exit(EXIT_FAILURE);
-	}
-	if ((tmp->n) >= 0 && (tmp->n) <= 127)
-	{
-		while (tmp != NULL)
+		if ((tmp->n) >= 0 && (tmp->n) <= 127)
 		{
-			if ((tmp->n) >= 33 && (tmp->n) <= 126)
+			if ((tmp->n) > 0 && (tmp->n) <= 127)
 			{
 				printf("%c", tmp->n);
 				tmp = tmp->next;
@@ -29,11 +25,10 @@ void pstr(stack_t **head, unsigned int n)
 				tmp = tmp->next;
 			}
 		}
+		else
+		{
+			break;
+		}
+	}
 	printf("\n");
-	}
-	else
-	{
-		fprintf(stderr, "L%d: can't pstro, value out of range\n", n);
-		exit(EXIT_FAILURE);
-	}
 }
