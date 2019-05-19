@@ -50,6 +50,7 @@ void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **head, unsigned int n);
+void rotl(stack_t **head, unsigned int n);
 void free_dlistint(stack_t *head);
 int _isdigit(char *c);
 void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi);
