@@ -3,17 +3,12 @@
  * pchar - print list
  * @head: list
  * @n: number
- * Return: number elements.
  */
 void pchar(stack_t **head, unsigned int n)
 {
 	stack_t *tmp = *head;
 
-	if (tmp == NULL)
-	{
-		return;
-	}
-	if (*head == NULL)
+	if (*head == NULL || head == NULL)
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", n);
 		exit(EXIT_FAILURE);

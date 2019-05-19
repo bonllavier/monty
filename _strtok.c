@@ -15,7 +15,7 @@ void _strtok(char *buf, unsigned int l_ct, char *tok, stack_t **he, FILE *fi)
 	instruction_t ints[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop}, {"swap", swap},
 		{"add", add}, {"nop", nop}, {"sub", sub}, {"div", divi}, {"mul", mul},
-		{"mod", mod}, {"pchar", pchar}, {NULL, NULL}
+		{"mod", mod}, {"pchar", pchar}, {"pstr", pstr}, {NULL, NULL}
 	};
 	char delimiters[] = " \n\t";
 
